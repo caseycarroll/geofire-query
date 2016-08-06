@@ -1,9 +1,12 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="bower_components/firebase/firebase.js"></script>
-<script src="bower_components/geofire/dist/geofire.js"></script>
+
 <!--
-  @demo demo/index.html
+`geofire-query`
+The geofire-query element is an easy way to query GeoFire objects from a Firebase database using the Polymer databinding system.
+
+@demo demo/index.html 
 -->
+
 <dom-module id="geofire-query">
   <template>
     <style>
@@ -20,76 +23,12 @@
       is: 'geofire-query',
 
       properties: {
-        /** URl to your geofire database*/
-        databaseURL: {
+        prop1: {
           type: String,
-          value: 'firebase-url',
+          value: 'geofire-query',
         },
-        geoFireObj: {
-          type: Object,
-        },
-        geoFireQuery: {
-          type: Object,
-        },
-        /** latitude for GeoFire Query
-         * Default is USAA in Plano, TX
-        */
-        latitude: {
-          type: Number,
-          value: 33.0790575
-        },
-        /** longitude for GeoFire Query
-         * Default is USAA in Plano, TX
-        */
-        longitude: {
-          type: Number,
-          value: -96.8197819
-        },
-        radius: {
-          type: String,
-          value: 300
-        }
       },
 
-      observers: [
-        'updateLatLng(latitude, longitude)'
-      ],
-
-      ready: function() {
-        console.log("called ready");
-        firebase.initializeApp({
-          apiKey: "AIzaSyBRM7B8vib6ZIMGJ0DQXrGhDc9T26pjxAE",
-          databaseURL: "https://atmawarenesseffort.firebaseio.com"
-        });
-
-        var firebaseRef = firebase.database().ref('atms/coordinates');
-        this.geoFireObj = new GeoFire(firebaseRef);
-        this._initialQuery(); //update after the local DOM is ready
-      },
-
-      _initialQuery:function() {
-        console.log("initial query" + this.latitude + this.radius);
-        this.geoFireQuery = this.geoFireObj.query({
-          center: [this.latitude, this.longitude],
-          radius: this.radius
-        });
-      },
-
-      /*Update the query to have new lat long values*/
-      updateLatLng: function(latitude, longitude) {
-        if(this.geoFireObj == null) return;
-
-        this.geoFireQuery.updateCriteria({
-          center:[latitude, longitude],
-          radius: this.radius
-        });
-      },
-      //
-      // onKeyEntered: function(latitude, longitude) {
-      //   var onKeyEnteredRegistration = this.geoFireQuery.on("key_entered", function(key, location) {
-      //     console.log(key + "key from key_entered callback and location" + location);
-      //   });
-      // }
     });
   </script>
 </dom-module>

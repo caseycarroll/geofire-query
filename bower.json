@@ -1,10 +1,9 @@
 {
   "name": "geofire-query",
-  "description": "Queries firebase database with GeoFire",
+  "description": "The geofire-query element is an easy way to query GeoFire objects from a Firebase database using the Polymer databinding system.",
   "main": "geofire-query.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "geofire": "^4.1.1"
+    "polymer": "Polymer/polymer#^1.4.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
