@@ -4,7 +4,7 @@
 `geofire-query`
 The geofire-query element is an easy way to query GeoFire objects from a Firebase database using the Polymer databinding system.
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="geofire-query">
@@ -14,7 +14,7 @@ The geofire-query element is an easy way to query GeoFire objects from a Firebas
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <h2>Hello [[log]]</h2>
   </template>
 
   <script>
@@ -22,11 +22,37 @@ The geofire-query element is an easy way to query GeoFire objects from a Firebas
 
       is: 'geofire-query',
 
+      behaviors: [
+        Polymer.FirebaseDatabaseBehavior
+      ],
+
       properties: {
-        prop1: {
-          type: String,
-          value: 'geofire-query',
+        log: {
+          type: Boolean,
+          value: false,
         },
+
+        query: {
+          type: Object,
+          computed: '__computeQuery(ref, orderByChild, limitToFirst, limitToLast, startAt, endAt, equalTo)',
+          observer: '__queryChanged'
+        }
+
+        latitude: {
+          type: String,
+          value: ''
+        },
+
+        longitude: {
+          type: String,
+          value: ''
+        }
+      },
+
+      _log: function(message) {
+        if(this.log) {
+          console.log('geofire-query: ' message);
+        }
       },
 
     });

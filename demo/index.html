@@ -11,6 +11,9 @@
 
     <link rel="import" href="../geofire-query.html">
 
+    <!-- import firebase-app element for demo -->
+    <link rel="import" href="../../polymerfire/firebase-app.html">
+
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
   </head>
@@ -20,7 +23,19 @@
       <h3>Basic geofire-query Demo</h3>
       <demo-snippet>
         <template>
-          <geofire-query></geofire-query>
+          <firebase-app
+            name="openpokestops"
+            api-key="AIzaSyBPWurKiHLZ-p3FPBvxgGQfXn2ircTXWjU"
+            database-url="https://openpokestops.firebaseio.com">
+          </firebase-app>          
+
+          <geofire-query
+            log
+            path="/pokestops"
+            data="{{data}}"
+            latitude="{{latitude}}"
+            longitude="{{longitude}}">
+          </geofire-query>
         </template>
       </demo-snippet>
     </div>
